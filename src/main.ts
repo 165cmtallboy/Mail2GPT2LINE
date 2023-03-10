@@ -35,6 +35,6 @@ getMails()
                     value1: message
                 }
             });
-            console.log(req);
+            // console.log(req);
         })
     })
