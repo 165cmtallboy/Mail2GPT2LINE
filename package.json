@@ -9,11 +9,16 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/mailparser": "^3.4.0",
+    "@types/node-imap": "^0.9.0",
+    "@types/request": "^2.48.8",
     "dotenv": "^16.0.3",
     "mailparser": "^3.6.4",
     "node-imap": "^0.9.6",
     "openai": "^3.2.1",
-    "parse-email": "^1.0.0"
+    "parse-email": "^1.0.0",
+    "request": "^2.88.2",
+    "typescript": "^4.9.5"
   },
   "devDependencies": {
     "eslint": "^8.35.0"
