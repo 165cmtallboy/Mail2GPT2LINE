@@ -40,8 +40,10 @@ export function getMails() {
                 let start = 0;
                 let done = 0;
 
-                if(!checkMail(box))
+                if(!checkMail(box)){
+                    imap.end();
                     return resolve([]);
+                }
 
                 var f = imap.seq.fetch(getLastMail(box) + ":*", {
                     bodies: ["HEADER.FIELDS (FROM)", "TEXT"],
@@ -104,8 +106,6 @@ export function getMails() {
             console.log("Connection ended");
         });
         imap.connect();
-
-        setTimeout(() => resolve(messages), 10000);
     });
 }
 
