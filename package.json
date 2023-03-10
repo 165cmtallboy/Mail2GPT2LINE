@@ -10,7 +10,9 @@
   "license": "ISC",
   "dependencies": {
     "dotenv": "^16.0.3",
+    "mailparser": "^3.6.4",
     "node-imap": "^0.9.6",
-    "openai": "^3.2.1"
+    "openai": "^3.2.1",
+    "parse-email": "^1.0.0"
   }
 }
