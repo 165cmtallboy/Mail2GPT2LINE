@@ -3,3 +3,4 @@ package-lock.json
 .env
 config.js
 src/config.ts
+lastMail
