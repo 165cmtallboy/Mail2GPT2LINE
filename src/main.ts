@@ -18,14 +18,20 @@ getMails()
             if(!marked)
                 return;
             
-            if(!mail.text)
-                return console.error("テキストがない");
+            let text = mail.text;
 
-            let choices = await makeShortByGPT(mail.text);
+            if(!text)
+                text = Buffer.from(mail.raw+"", "base64").toString();
+
+            let choices = await makeShortByGPT(text+"");
             let gpt_response = choices.map((choice) => choice.message?.content).join('\n');
 
             let message = `送信元: ${froms.replace('<','').replace('>', '')}\n\nAIによる要約:\n\n${gpt_response}`;
-            console.log(message)
+            console.log(message);
+
+            if(process.env.DONT_SEND)
+                return;
+
             let req = await post({
                 uri: process.env.IFTTT_WEBHOOK || "",
                 headers: {

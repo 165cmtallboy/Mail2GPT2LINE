@@ -1,6 +1,6 @@
 import 'dotenv/config';
 import Imap from "node-imap";
-import { simpleParser } from "mailparser";
+import { ParsedMail, simpleParser } from "mailparser";
 import fs from "fs";
 import { promisify } from "util";
 import { watching } from "./config";
@@ -67,7 +67,8 @@ export function getMails() {
                                 let data = await simpleParser(buffer);
                                 console.log("data incomming", start, done)
                                 messages.push({
-                                    from, text: data.text
+
+                                    from, text: data.text, raw: buffer
                                 })
                                 done++;
 
@@ -113,4 +114,5 @@ export function getMails() {
 export interface EMail{
     from: string[]
     text?: string
+    raw?: string
 }
