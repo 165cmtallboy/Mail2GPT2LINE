@@ -1,11 +1,9 @@
-import 'dotenv/config';
+import "dotenv/config";
 import Imap from "node-imap";
-import { ParsedMail, simpleParser } from "mailparser";
+import { simpleParser } from "mailparser";
 import fs from "fs";
-import { promisify } from "util";
-import { watching } from "./config";
 
-var imap = new Imap({
+const imap = new Imap({
     user: process.env.MAIL_USER || "",
     password: process.env.MAIL_PASSWORD || "",
     host: process.env.MAIL_HOST || "",
@@ -14,7 +12,7 @@ var imap = new Imap({
 });
 
 function checkMail(box: Imap.Box){
-    if (!fs.existsSync("./lastMail"))
+    if (!fs.existsSync("./lastMail"))  
         return true;
     
     return getLastMail(box) < box.messages.total;
@@ -33,7 +31,7 @@ function saveLastMail(box: Imap.Box) {
 // TODO: ネストを治したい
 export function getMails() {
     return new Promise<EMail[]>((resolve, reject) => {
-        let messages: EMail[] = [];
+        const messages: EMail[] = [];
 
         imap.once("ready", async () => {
             imap.openBox("INBOX", true, (err, box) => {
@@ -45,7 +43,7 @@ export function getMails() {
                     return resolve([]);
                 }
 
-                var f = imap.seq.fetch(getLastMail(box) + ":*", {
+                const f = imap.seq.fetch(getLastMail(box) + ":*", {
                     bodies: ["HEADER.FIELDS (FROM)", "TEXT"],
                 });
 
@@ -57,19 +55,19 @@ export function getMails() {
                     msg.on("body", (stream, info) => {
 
                         // ストリームの内容をバッファーに貯める
-                        let buffer = '';
+                        let buffer = "";
                         stream.on("data", chunk => {
                             buffer += chunk.toString("utf8");
                         });
 
                         stream.once("end", async () => {
                             if (info.which === "TEXT") {
-                                let data = await simpleParser(buffer);
-                                console.log("data incomming", start, done)
+                                const data = await simpleParser(buffer);
+                                console.log("data incomming", start, done);
                                 messages.push({
 
                                     from, text: data.text, raw: buffer
-                                })
+                                });
                                 done++;
 
                                 if(done === start)
