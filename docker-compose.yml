@@ -1,0 +1,9 @@
+version: "3.5"
+
+services:
+    app: 
+      build: ./
+      name: mail-gpt
+      tty: true
+      environment:
+        DONT_SEND: 1

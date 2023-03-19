@@ -16,11 +16,13 @@
     "@types/request": "^2.48.8",
     "dotenv": "^16.0.3",
     "mailparser": "^3.6.4",
+    "node-cron": "^3.0.2",
     "node-imap": "^0.9.6",
     "openai": "^3.2.1",
     "request": "^2.88.2"
   },
   "devDependencies": {
+    "@types/node-cron": "^3.0.7",
     "@typescript-eslint/eslint-plugin": "^5.55.0",
     "@typescript-eslint/parser": "^5.55.0",
     "eslint": "^8.35.0",
