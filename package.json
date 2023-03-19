@@ -18,13 +18,12 @@
     "mailparser": "^3.6.4",
     "node-imap": "^0.9.6",
     "openai": "^3.2.1",
-    "parse-email": "^1.0.0",
-    "request": "^2.88.2",
-    "typescript": "^4.9.5"
+    "request": "^2.88.2"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.55.0",
     "@typescript-eslint/parser": "^5.55.0",
-    "eslint": "^8.35.0"
+    "eslint": "^8.35.0",
+    "typescript": "^5.0.2"
   }
 }
