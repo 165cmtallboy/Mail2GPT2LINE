@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
-    "run": "node dist/main.js"
+    "run": "node dist/main.js",
+    "test": "DONT_SEND=1 ts-node src/main.ts"
   },
   "author": "",
   "license": "ISC",

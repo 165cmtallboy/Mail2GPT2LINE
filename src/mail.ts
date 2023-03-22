@@ -44,7 +44,7 @@ export function getMails() {
                 }
 
                 const f = imap.seq.fetch(getLastMail(box) + ":*", {
-                    bodies: ["HEADER.FIELDS (FROM)", "TEXT"],
+                    bodies: ["HEADER.FIELDS (FROM TO)", "TEXT"],
                 });
 
                 // メッセージの処理
@@ -52,6 +52,7 @@ export function getMails() {
                     start++;
                     console.log("Message #%d を処理しています。", seqno);
                     let from: string[];
+                    let to: string[];
                     msg.on("body", (stream, info) => {
 
                         // ストリームの内容をバッファーに貯める
@@ -66,15 +67,17 @@ export function getMails() {
                                 console.log("data incomming", start, done);
                                 messages.push({
 
-                                    from, text: data.text, raw: buffer
+                                    to, from, text: data.text, raw: buffer
                                 });
                                 done++;
 
                                 if(done === start)
                                     resolve(messages);
                             } else {
-                                console.log("Parsed header: %s", Imap.parseHeader(buffer).from);
-                                from = Imap.parseHeader(buffer).from;
+                                console.log("Parsed header: %s", Imap.parseHeader(buffer));
+                                const header = Imap.parseHeader(buffer);
+                                from = header.from;
+                                to = header.to;
                             }
                         });
 
@@ -111,6 +114,7 @@ export function getMails() {
 
 export interface EMail{
     from: string[]
+    to: string[]
     text?: string
     raw?: string
 }
